@@ -2,15 +2,21 @@ import React from 'react';
 
 function ProductCard({ product }) {
   return (
-    <div className="bg-white shadow-sm rounded-md p-2 flex flex-col items-center text-center h-32"> 
+    <div className="card mb-3" style={{ height: '100%' }}> {/* Allow card to stretch */}
       <img
+        className="card-img-top"
         src={product.image}
         alt={product.title}
-        className="h-20 w-20 object-contain mb-1" 
+        style={{ height: '150px', objectFit: 'contain' }} // Adjust image size
       />
-      <h2 className="text-xs font-semibold line-clamp-2">{product.title}</h2> 
-      <p className="text-gray-700 text-xs mt-1">${product.price}</p> 
-      <p className="text-yellow-500 text-xs">Rating: {product.rating?.rate || 'N/A'}</p> 
+      <div className="card-body d-flex flex-column">
+        <h5 className="card-title text-truncate">{product.title}</h5> {/* Truncate title if too long */}
+        <p className="card-text" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          ${product.price}
+        </p>
+        <p className="text-warning">Rating: {product.rating?.rate || 'N/A'}</p>
+        
+      </div>
     </div>
   );
 }
